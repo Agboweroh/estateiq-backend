@@ -13,13 +13,21 @@ const upload = multer({ storage: multer.memoryStorage() });
 const JWT_SECRET =
 	process.env.JWT_SECRET || "estateiq-secret-change-in-production";
 
+// app.use(
+// 	cors({
+// 		origin: [
+// 			process.env.CLIENT_URL || "http://localhost:5173",
+// 			/\.vercel\.app$/,
+// 			/localhost/,
+// 		],
+// 		credentials: true,
+// 	}),
+// );
 app.use(
 	cors({
-		origin: [
-			process.env.CLIENT_URL || "http://localhost:5173",
-			/\.vercel\.app$/,
-			/localhost/,
-		],
+		origin: function (origin, callback) {
+			callback(null, true);
+		},
 		credentials: true,
 	}),
 );
